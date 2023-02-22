@@ -6,7 +6,7 @@ Contains main driver code to create a user request.
 """
 def main(): 
     if len(sys.argv) != 3:
-        print("usage: main.py <amount to spend> <.csv path>") 
+        print("usage: py main.py <amount to spend> <.csv path>") 
         return
     requested = int(sys.argv[1])
     filepath = sys.argv[2]
