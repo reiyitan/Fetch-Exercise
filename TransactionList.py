@@ -3,10 +3,8 @@ from collections import defaultdict
 from Transaction import Transaction 
 
 class TransactionManager: 
-    """
-    Class for managing transactions. Reads in a .csv of payer transaction 
-    information and processes user requests. 
-    """
+    #Class for managing transactions. Reads in a .csv of payer transaction 
+    #information and processes user requests. 
 
     def __init__(self, filepath): 
         self.payerBalances = self.initBalances(filepath)
@@ -14,13 +12,11 @@ class TransactionManager:
         self.initTransactions(filepath) 
     
     def initBalances(self, filepath): 
-        """
-        Creates a dictionary where keys are payer names and values are the 
-        total balances of payers. 
+        #Creates a dictionary where keys are payer names and values are the 
+        #total balances of payers. 
 
-        filepath: the file to the .csv containing transaction information. 
-        Returns a dictionary of payer-balance pairs. 
-        """
+        #filepath: the file to the .csv containing transaction information. 
+        #Returns a dictionary of payer-balance pairs. 
         payerBalances = defaultdict(lambda : 0) 
         with open(filepath, "r") as file: 
             reader = csv.reader(file) 
@@ -32,11 +28,9 @@ class TransactionManager:
         return dict(payerBalances)
 
     def insertTransaction(self, transaction): 
-        """
-        Helper method for initTransactions. 
-        Uses binary insert to insert a transaction into self.transactions,
-        sorted by timestamp.
-        """
+        #Helper method for initTransactions. 
+        #Uses binary insert to insert a transaction into self.transactions,
+        #sorted by timestamp.
         if len(self.transactions) == 0: 
             self.transactions.append(transaction) 
             return 
@@ -61,14 +55,12 @@ class TransactionManager:
                 lower = middle + 1
 
     def initTransactions(self, filepath):     
-        """
-        Creates a list of transactions such that more recent transactions
-        are located at lower indices of the list, and older transactions
-        are located at higher indices of the list. Ignores transactions with 
-        negative amounts. 
+        #Creates a list of transactions such that more recent transactions
+        #are located at lower indices of the list, and older transactions
+        #are located at higher indices of the list. Ignores transactions with 
+        #negative amounts. 
     
-        filepath: the path to the .csv file containing transaction information. 
-        """
+        #filepath: the path to the .csv file containing transaction information. 
         with open(filepath, "r") as file: 
             reader = csv.reader(file) 
             next(reader) #skip .csv header 
@@ -79,15 +71,13 @@ class TransactionManager:
                 self.insertTransaction(Transaction(payer, amount, timestamp))
 
     def processUserRequest(self, requested): 
-        """
-        Processes a user request according to the following rules: 
-        Points with the oldest timestamp are used first. 
-        Payer balances must not be negative after processing the user request. 
+        #Processes a user request according to the following rules: 
+        #Points with the oldest timestamp are used first. 
+        #Payer balances must not be negative after processing the user request. 
 
-        This function modifies self.payerBalances as well as self.transactions. 
+        #This function modifies self.payerBalances as well as self.transactions. 
 
-        requested: The amount of points a user requested. 
-        """
+        #requested: The amount of points a user requested. 
         usedTransactions = [] 
 
         while requested > 0: 
