@@ -1,9 +1,8 @@
 import sys 
 from TransactionList import TransactionManager
 
-"""
-Contains main driver code to create a user request. 
-"""
+#Contains main driver code to create a user request. 
+
 def main(): 
     if len(sys.argv) != 3:
         print("usage: py main.py <amount to spend> <.csv path>") 
